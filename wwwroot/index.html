@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>excel-blazor-web-addin</title>
+    <base href="/" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="excel-blazor-web-addin.styles.css" rel="stylesheet" />
+    <script type="text/javascript">
+        "use strict";
+        // https://learn.microsoft.com/en-us/answers/questions/1150659/uncaught-typeerror-history-pushstate-is-not-a-func
+        // Office.js deletes window.history.pushState and window.history.replaceState. Cache them and restore them after Office.js is loaded.
+        window._historyCache = {
+            replaceState: window.history.replaceState,
+            pushState: window.history.pushState
+        };
+    </script>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script type="text/javascript">
+        "use strict";
+        Office.initialize = (reason) => {
+            // If you need to initialize something you can do so here.
+            console.log(`Office.initialize(reason: ${reason})`);
+        };
+        Office.onReady((info) => {
+            // Check that we loaded into Excel.
+            if (info.host === Office.HostType.Excel) {
+                window.OfficeContext = info.host;
+            }
+            console.log(`Office.onReady(window.OfficeContext: ${window.OfficeContext})`);
+        });
+        // Office.js deletes window.history.pushState and window.history.replaceState. Restore them here.
+        window.history.replaceState = window._historyCache.replaceState;
+        window.history.pushState = window._historyCache.pushState;
+    </script>
+    <script defer type="text/javascript" src="js/resize.js"></script>
+    <script defer type="text/javascript" src="_framework/blazor.webassembly.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <svg class="loading-progress">
+            <circle r="40%" cx="50%" cy="50%" />
+            <circle r="40%" cx="50%" cy="50%" />
+        </svg>
+        <div class="loading-progress-text"></div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+</body>
+
+</html>

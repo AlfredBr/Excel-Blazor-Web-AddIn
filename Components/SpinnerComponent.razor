@@ -1,0 +1,16 @@
+﻿@using excel_blazor_web_addin.Models
+
+@if (ViewModel is null || ViewModel.IsLoading)
+{
+    <div class="row">
+        <div class="col">
+            <div class="spinner-border mx-auto d-block"></div>
+            <h3 class="d-flex justify-content-center align-items-center mt-3">@ChildContent</h3>
+        </div>
+    </div>
+}
+@code
+{
+    [Parameter] public IViewModel? ViewModel { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

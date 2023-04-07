@@ -1,0 +1,39 @@
+{
+	"functions": [
+	  {
+		"description": "Add two numbers",
+		"id": "ADD",
+		"name": "ADD",
+		"parameters": [
+		  {
+			"description": "First number",
+			"name": "first",
+			"type": "number"
+		  },
+		  {
+			"description": "Second number",
+			"name": "second",
+			"type": "number"
+		  }
+		],
+		"result": {
+		  "type": "number"
+		}
+	  },
+	  {
+		"description": "Volume of a sphere",
+		"id": "SPHEREVOLUME",
+		"name": "SPHEREVOLUME",
+		"parameters": [
+		  {
+			"description": "Radius of the sphere",
+			"name": "radius",
+			"type": "number"
+		  }
+		],
+		"result": {
+		  "type": "number"
+		}
+	  }
+	]
+}

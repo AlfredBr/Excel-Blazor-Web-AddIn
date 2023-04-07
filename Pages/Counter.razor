@@ -1,0 +1,67 @@
+﻿@page "/counter"
+@using System.Diagnostics;
+@using Microsoft.AspNetCore.Components;
+@using Microsoft.JSInterop;
+@using System.Drawing;
+@using System.Reflection;
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @currentCount</p>
+<p role="status">Current cell: @currentCell</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    [Inject] public IJSRuntime JSRuntime { get; set; } = default!;
+    public IJSObjectReference JSModule { get; set; } = default!;
+    private DotNetObjectReference<Counter>? _objRef = null;
+    private Size _size = new Size(0, 0);
+    private int currentCount = 0;
+	private string currentCell = "";
+
+    [JSInvokable]
+    public async Task OnResize(int width, int height)
+    {
+        Console.WriteLine($"OnResize({width},{height})");
+        _size = new Size(width, height);
+        await InvokeAsync(StateHasChanged);
+    }
+
+	[JSInvokable]
+    public async Task OnChanged(string cellString, string cellValue)
+    {
+        Console.WriteLine($"OnChanged({cellString} : '{cellValue}')");
+        await InvokeAsync(StateHasChanged);
+    }
+
+	[JSInvokable]
+	public async Task OnSelectionChanged(string cellString, string cellValue)
+	{
+		currentCell = $"{cellString} : '{cellValue}'";
+		await InvokeAsync(StateHasChanged);
+	}
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _objRef = DotNetObjectReference.Create(this);
+            Debug.Assert(JSRuntime is not null);
+            Debug.Assert(_objRef is not null);
+            _ = await JSRuntime.InvokeAsync<string>("SetDotNetHelper", _objRef);
+            JSModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Pages/Counter.razor.js");
+            Debug.Assert(JSModule is not null);
+			await JSModule.InvokeVoidAsync("registerHandlersAsync");
+            await base.OnAfterRenderAsync(firstRender);
+        }
+    }
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        await JSModule.InvokeVoidAsync("incrementCountAsync", currentCount);
+    }
+}

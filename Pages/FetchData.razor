@@ -1,0 +1,90 @@
+﻿@page "/fetchdata"
+@using excel_blazor_web_addin.Models;
+@using excel_blazor_web_addin.Components;
+@inject HttpClient Http
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (recordset == null)
+{
+    <SpinnerComponent>Loading, Please wait...</SpinnerComponent>
+}
+else
+{
+    <table class="table @OfficeContext">
+        <thead>
+            <tr>
+                @foreach (var header in recordset.Headers)
+                {
+                    <th>@header</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var forecast in recordset.Records)
+            {
+                <tr>
+                    <td>@forecast.Date.ToShortDateString()</td>
+                    <td>@forecast.TemperatureC</td>
+                    <td>@forecast.TemperatureF</td>
+                    <td>@forecast.Summary</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <button type="button" class="btn btn-success shadow-none @BrowserVis" @onclick="GetWeatherData">Get Weather Data</button>
+    <button type="button" class="btn btn-primary shadow-none @ExcelVis" @onclick="InsertWeatherData">Insert Weather Data</button>
+
+}
+
+@code {
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; } = default!;
+    public IJSObjectReference JSModule { get; set; } = default!;
+    private string OfficeContext = "Excel";
+
+    private string BrowserVis = "";
+    private string ExcelVis = "";
+
+    private Recordset<WeatherForecast>? recordset = null;
+
+    private async Task RefreshAsync()
+    {
+        var forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
+        recordset = new Recordset<WeatherForecast>(forecasts);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+        await RefreshAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            JSModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Pages/FetchData.razor.js");
+            OfficeContext = await JSModule.InvokeAsync<string>("getOfficeContextAsync");
+            BrowserVis = OfficeContext == "Excel" ? "d-none" : "";
+            ExcelVis = OfficeContext == "Excel" ? "" : "d-none";
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private async Task GetWeatherData()
+    {
+        await RefreshAsync();
+        await JSModule.InvokeVoidAsync("getWeatherDataAsync", recordset);
+    }
+    private async Task InsertWeatherData()
+    {
+        await JSModule.InvokeVoidAsync("insertWeatherDataAsync", recordset);
+    }
+}
