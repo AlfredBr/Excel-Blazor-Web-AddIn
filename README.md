@@ -10,5 +10,5 @@ Excel Web AddIn template uses .NET Framework 4.8 and I wanted to use something m
 This builds on the base Blazor WebAssembly "Weather Forecast" project that is created by the default template.
 I added some ideas that I found from around the internet and it works pretty well!
 
-You can run this project both as a standard webpage in a browser and you can load the manifest.xml file into Microsoft Excel and run it as a web addin.
-(To do this, you'll have to setup the /manifest folder as a share on your machine and then use the Excel Trust Center to trust that add in folder.)
+You can run this project both as a standard webpage in a browser and you can load the *manifest.xml* file into Microsoft Excel and run it in a TaskPane.
+(To do this, you'll have to setup the */manifest* folder as a share on your machine and then use the Excel Trust Center to trust that add in folder.)
