@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\excel-blazor-web-addin.props" />
-</Project>
