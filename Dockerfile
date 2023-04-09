@@ -12,4 +12,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:latest AS serve
 WORKDIR /app
 COPY --from=build /app/out ./bin
 EXPOSE 7061
-#ENTRYPOINT [ "dotnet", "./bin/excel-blazor-web-addin.dll" ]
+ENTRYPOINT [ "dotnet", "./bin/excel-blazor-web-addin.dll" ]
