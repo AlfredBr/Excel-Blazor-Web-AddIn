@@ -4,7 +4,7 @@ WORKDIR /app
 RUN git clone https://github.com/AlfredBr/excel-blazor-web-addin.git src
 WORKDIR /app/src
 RUN dotnet restore
-RUN dotnet build -c Release -o /app/build
+RUN dotnet build -c Release -o /app/out
 RUN dotnet publish -c Release -o /app/out
 
 # serve
