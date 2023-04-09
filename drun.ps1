@@ -1,0 +1,1 @@
+docker run   --rm --name "excel-blazor-web-addin" -p 7061:7061 "local/excel-blazor-web-addin"
