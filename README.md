@@ -14,6 +14,4 @@ You can run this project:
 - as a standard webpage in a browser 
 - in an Excel TaskPane after you load the *manifest.xml* file into Microsoft Excel
 
-Important: To load the manifest.xml file, you'll have to setup the */manifest* folder as a share on your machine and then use the ```Excel Trust Center``` to add that shared folder name to the ```Trusted Catalogs Table```. 
-
-*You must do this step! It won't side-load in Visual Studio like the default template does.*
+Important: To load the manifest.xml file, you'll have to setup the */manifest* folder as a share on your machine and then use the ```Excel Trust Center``` to add that shared folder name to the ```Trusted Catalogs Table```. *You must do this step! It won't side-load in Visual Studio like the default template does.*
