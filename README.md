@@ -16,4 +16,4 @@ You can run this project:
 
 Important: To load the manifest.xml file, you'll have to setup the */manifest* folder as a share on your machine and then use the ```Excel Trust Center``` to add that shared folder name to the ```Trusted Catalogs Table```. 
 
-*You have to do this step - it won't side-load in Visual Studio like the default template does.*
+*You must do this step! It won't side-load in Visual Studio like the default template does.*
