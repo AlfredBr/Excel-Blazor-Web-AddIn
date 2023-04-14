@@ -155,7 +155,7 @@
             <bt:ShortStrings>
                 <bt:String id="Contoso.Functions.Namespace" DefaultValue="CONTOSO"/>
                 <bt:String id="Contoso.TaskpaneButton.Label" DefaultValue="Blazor Excel Web AddIn" />
-                <bt:String id="Contoso.Group1Label" DefaultValue="[Group1Label]" />
+                <bt:String id="Contoso.Group1Label" DefaultValue="AlfredBr" />
                 <bt:String id="Contoso.GetStarted.Title" DefaultValue="[GetStarted Title]" />
             </bt:ShortStrings>
             <!-- LongStrings max characters==250. -->
