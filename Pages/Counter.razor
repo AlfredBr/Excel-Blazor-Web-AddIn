@@ -9,10 +9,14 @@
 
 <h1>Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
-<p role="status">Current cell: @currentCell</p>
+<p>Demonstrates two-way communication between Excel and the AddIn.</p>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<div class="alert alert-info"><strong>OfficeContext: </strong>@(OfficeContext ?? "Browser")</div>
+
+<div class="alert alert-secondary">Current count: @currentCount</div>
+<div class="alert alert-primary">Current Location: <b class="mx-4">@cellLocation</b>  Current value: <b class="mx-4">@cellValue</b></div>
+
+<button class="btn btn-primary shadow-none" @onclick="IncrementCount">Click me</button>
 
 @code {
     [Inject] public IJSRuntime JSRuntime { get; set; } = default!;
@@ -20,7 +24,11 @@
     private DotNetObjectReference<Counter>? _objRef = null;
     private Size _size = new Size(0, 0);
     private int currentCount = 0;
-	private string currentCell = "";
+	private string cellLocation = "";
+	private string cellValue = "";
+	private string OfficeContext = "Excel";
+    private string BrowserVis = "";
+    private string ExcelVis = "";
 
     [JSInvokable]
     public async Task OnResize(int width, int height)
@@ -38,9 +46,10 @@
     }
 
 	[JSInvokable]
-	public async Task OnSelectionChanged(string cellString, string cellValue)
+	public async Task OnSelectionChanged(string cellLocation, string cellValue)
 	{
-		currentCell = $"{cellString} : '{cellValue}'";
+		this.cellLocation = cellLocation;
+		this.cellValue = cellValue;
 		await InvokeAsync(StateHasChanged);
 	}
 
@@ -55,6 +64,9 @@
             JSModule = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./Pages/Counter.razor.js");
             Debug.Assert(JSModule is not null);
 			await JSModule.InvokeVoidAsync("registerHandlersAsync");
+            OfficeContext = await JSModule.InvokeAsync<string>("getOfficeContextAsync");
+            BrowserVis = OfficeContext == "Excel" ? "d-none" : "";
+            ExcelVis = OfficeContext == "Excel" ? "" : "d-none";
             await base.OnAfterRenderAsync(firstRender);
         }
     }

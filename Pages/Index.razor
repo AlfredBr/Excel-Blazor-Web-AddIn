@@ -1,16 +1,16 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Hello World!</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hello World!</h1>
 
 Welcome to your new app.
 
+<div class="alert alert-info mt-2"><strong>OfficeContext: </strong>@(OfficeContext ?? "Browser")</div>
+
 <SurveyPrompt Title="How is Blazor working for you?" />
 
-<div class="alert alert-info mt-4"><strong>OfficeContext: </strong>@(OfficeContext ?? "Browser")</div>
-
-<button type="button" class="btn btn-success shadow-none" @onclick="HelloWorld">Hello World</button>
+<button type="button" class="btn btn-success shadow-none" @onclick="HelloWorld">Hello World!</button>
 
 @code {
     private async Task HelloWorld()
