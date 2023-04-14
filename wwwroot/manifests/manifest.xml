@@ -138,10 +138,10 @@
         <!-- You can use resources across hosts and form factors. -->
         <Resources>
             <bt:Images>
-                <bt:Image id="Contoso.tpicon_16x16" DefaultValue="https://localhost:7061/Images/icon16x16.png" />
-                <bt:Image id="Contoso.tpicon_32x32" DefaultValue="https://localhost:7061/Images/icon32x32.png" />
-                <bt:Image id="Contoso.tpicon_64x64" DefaultValue="https://localhost:7061/Images/icon64x64.png" />
-                <bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://localhost:7061/Images/icon80x80.png" />
+                <bt:Image id="Contoso.tpicon_16x16" DefaultValue="https://localhost:7061/Images/Sample16x16.png" />
+                <bt:Image id="Contoso.tpicon_32x32" DefaultValue="https://localhost:7061/Images/Sample32x32.png" />
+                <bt:Image id="Contoso.tpicon_64x64" DefaultValue="https://localhost:7061/Images/Sample64x64.png" />
+                <bt:Image id="Contoso.tpicon_80x80" DefaultValue="https://localhost:7061/Images/Sample80x80.png" />
             </bt:Images>
             <bt:Urls>
                 <bt:Url id="Contoso.DesktopFunctionFile.Url" DefaultValue="https://localhost:7061/Functions/functions.html" />
