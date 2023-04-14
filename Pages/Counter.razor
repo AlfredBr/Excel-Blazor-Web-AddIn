@@ -9,12 +9,15 @@
 
 <h1>Counter</h1>
 
-<p>Demonstrates two-way communication between Excel and the AddIn.</p>
+<p>Demonstrates communication between Excel and the AddIn.</p>
 
 <div class="alert alert-info"><strong>OfficeContext: </strong>@(OfficeContext ?? "Browser")</div>
 
-<div class="alert alert-secondary">Current count: @currentCount</div>
-<div class="alert alert-primary">Current Location: <b class="mx-4">@cellLocation</b>  Current value: <b class="mx-4">@cellValue</b></div>
+<div class="alert alert-secondary"><span class="label">Current count:</span><b>@currentCount</b></div>
+<div class="alert alert-dark">
+	<span class="label">Current Location:</span><b>@cellLocation</b>
+	<br />
+	<span class="label">Current Value:</span><b>@cellValue</b></div>
 
 <button class="btn btn-primary shadow-none" @onclick="IncrementCount">Click me</button>
 
