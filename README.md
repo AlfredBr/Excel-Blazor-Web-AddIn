@@ -16,3 +16,5 @@ You can run this project:
 - in an Excel TaskPane after you load the *manifest.xml* file into Microsoft Excel
 
 Important: To load the manifest.xml file, you'll have to setup the */manifest* folder as a share on your machine and then use the ```Excel Trust Center``` to add that shared folder name to the ```Trusted Catalogs Table```.  (There are lots of tutorials about this.)  *You must do this step! Visual Studio won't side-load the addin like the default template does.*
+
+![Made with C#](https://forthebadge.com/images/badges/made-with-c-sharp.svg)
