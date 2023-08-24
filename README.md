@@ -1,4 +1,4 @@
-# excel-blazor-web-addin
+# Excel-Blazor-Web-AddIn
 A Blazor WebAssembly Excel Web AddIn 
 
 ![image](https://github.com/AlfredBr/excel-blazor-web-addin/blob/main/ExcelBlazorWebAddIn.png)
@@ -17,4 +17,3 @@ You can run this project:
 
 Important: To load the manifest.xml file, you'll have to setup the */manifest* folder as a share on your machine and then use the ```Excel Trust Center``` to add that shared folder name to the ```Trusted Catalogs Table```.  (There are lots of tutorials about this.)  *You must do this step! Visual Studio won't side-load the addin like the default template does.*
 
-![Made with C#](https://forthebadge.com/images/badges/made-with-c-sharp.svg)
